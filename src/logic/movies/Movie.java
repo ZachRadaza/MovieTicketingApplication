@@ -30,6 +30,15 @@ public class Movie{
 		description = "";
 		
 	}
+	//copies everything
+	public Movie(Movie copy){
+		this.title = copy.getTitle();
+		this.length = copy.getLength();
+		this.time = copy.getTime();
+		this.rating = copy.getRating();
+		description = copy.getDescription();
+		
+	}
 	
 	//getters
 	public String getTitle(){
@@ -100,6 +109,13 @@ public class Movie{
 	public void unBookSeat(Seat seat){
 		seat.setTaken(false);
 		seat.setOwner("");
+	}
+	
+	//makes a copy of itself
+	public Movie makeCopy(){
+		Movie copy = new Movie(title, length, time, rating);
+		copy.setDescription(description);
+		return copy;
 	}
 	
 }

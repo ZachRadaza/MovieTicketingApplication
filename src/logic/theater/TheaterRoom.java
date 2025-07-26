@@ -11,7 +11,6 @@ public class TheaterRoom{
 	private Movie movie; //the movie the theater will play the whole day
 	private ArrayList<Movie> movies; //all the movies, with the bookings the theater is about to play in the day;
 	
-	
 	public TheaterRoom(int number, Movie movie){
 		this.number = number;
 		this.movie = movie;
@@ -46,6 +45,24 @@ public class TheaterRoom{
 	
 	//methods
 	private void scheduleMovies(){ //populates movies and schedules times through the day, open from 11 am to 12 am
+		float length = movie.getLength() + 0.25f;
+		float[] times = new float[16]; //0 for nothing
 		
+		int index = 0;
+		float currentTime = 11f; //current time in the iteration
+		//fills times array
+		while(currentTime <= 24f){
+			times[index] = currentTime;
+			index++;
+			currentTime += length;
+		}
+		
+		//add times array to list
+		for(int i = 0; i < times.length; i++){
+			if(times[i] == 0) break;
+			Movie copy = movie.makeCopy();
+			copy.setTime(times[i]);
+			movies.add(copy);
+		}
 	}
 }

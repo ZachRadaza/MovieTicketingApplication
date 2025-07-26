@@ -14,9 +14,9 @@ public class SeatImax extends Seat{
 	
 	//converts seat number into a name, using the seat pattern of this specific cinema
 	private String converter(int num){
-		if(num <= 27){ //A1 - A27
+		if(num < 27){ //A1 - A27
 			return "A" + num;
-		} else if(num <= 57){ //B1 - B30
+		} else if(num < 57){ //B1 - B30
 			return "B" + (num - 27);
 		} else { // C1 - L37
 			int number = num - 57;

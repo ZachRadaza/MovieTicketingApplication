@@ -14,9 +14,9 @@ public class Seat3D extends Seat{
 	
 	//converts seat number into a name, using the seat pattern of this specific cinema
 	private String converter(int num){
-		if(num <= 14){ //A1 - A14
-			return "A" + num;
-		} else if(num <= 86){ //B1 - D24
+		if(num < 14){ //A1 - A14
+			return "A" + (num + 1);
+		} else if(num < 86){ //B1 - D24
 			int number = num - 14;
 			String[] letter = {"B", "C", "D"};
 			int letterInt = number / 24;

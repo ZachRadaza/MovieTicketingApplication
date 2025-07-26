@@ -1,13 +1,13 @@
 package guiComponents;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Frame extends JFrame{
-private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 1L;
 	
 	//private final Color bgColor = Color.WHITE;
 
@@ -19,7 +19,6 @@ private static final long serialVersionUID = 1L;
 
 		this.setMinimumSize(new Dimension(500, 500));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setBackground(bgColor);
 		
 		this.setResizable(false);
 		

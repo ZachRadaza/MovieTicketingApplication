@@ -14,11 +14,11 @@ public class SeatRegular extends Seat{
 	
 	//converts seat number into a name, using the seat pattern of this specific cinema
 	private String converter(int num){
-		if(num <= 48){ //A1 - C16
+		if(num < 48){ //A1 - C16
 			String[] letter = {"A", "B", "C"};
 			int letterInt = num / 16;
 			return letter[num / 16] + (num - (letterInt * 16));
-		} else if(num <= 152){ //D1 - K13
+		} else if(num < 152){ //D1 - K13
 			int number = num - 48;
 			String[] letter = {"D", "E", "F", "G", "H", "I", "J", "K"};
 			int letterInt = number / 13;

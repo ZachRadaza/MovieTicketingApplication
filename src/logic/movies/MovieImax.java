@@ -1,6 +1,5 @@
 package logic.movies;
 
-import logic.seats.Seat;
 import logic.seats.SeatImax;
 
 
@@ -13,11 +12,30 @@ public class MovieImax extends Movie{
 		
 	}
 	
+	public MovieImax(String name, float length){
+		super(name, length);
+		iniSeats(381);
+	}
+	
+	public MovieImax(Movie c){
+		super(c);
+		iniSeats(381);
+	}
+	
+	
 	private void iniSeats(int num){
 		seats = new SeatImax[num];
 		for(int i = 0; i < num; i++){
-			seats[i] = new Seat(i + 1);
+			seats[i] = new SeatImax(i);
 		}
+	}
+	
+	//makes a copy of itself
+	public MovieImax makeCopy(){
+		MovieImax copy = new MovieImax(getTitle(), getLength(), getTime(), getRating());
+		copy.setDescription(getDescription());
+		copy.iniSeats(420);
+		return copy;
 	}
 	
 }
