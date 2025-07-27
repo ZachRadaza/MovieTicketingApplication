@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.GraphicsEnvironment;
+
 import guiComponents.MainFrame;
 import logic.TimeConverter;
 import logic.movies.Movie;
@@ -9,6 +11,10 @@ import logic.movies.MovieRegular;
 import logic.theater.TheaterHouse;
 
 public class Main{
+	
+	private static TheaterHouse house;
+	private static MainFrame gui;
+	
 	public static void main(String[] args){
 
 		Movie[] reg1 = new Movie[7];
@@ -20,15 +26,16 @@ public class Main{
 		set3D(threeD);
 		setImax(imax);
 		
-		TheaterHouse house = new TheaterHouse(reg1, reg2, threeD, imax);
-		
-		MainFrame gui = new MainFrame();
+		house = new TheaterHouse(reg1, reg2, threeD, imax);
+		gui = new MainFrame(house);
 		
 		int i = 0;
 		while(house.getImax().getRoom(1).getMovies(i) != null){
 			System.out.println((i + 1) + ". " + house.getImax().getRoom(1).getMovies(i).getTitle() + ", " + house.getImax().getRoom(1).getMovies(i).getLength() + ", " + TimeConverter.converterToString(house.getImax().getRoom(1).getMovies(i).getTime()));
 			i++;
 		}
+		
+		listFonts();
 	}
 	
 	//testing
@@ -67,4 +74,16 @@ public class Main{
 			reg1[i] = new MovieImax(titles[i], lengths[i]);
 		}
 	}
+	
+	
+	private static void listFonts(){
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		
+        String[] fontNames = ge.getAvailableFontFamilyNames();
+
+        for (String fontName : fontNames) {
+            System.out.println(fontName);
+        }
+	}
+	
 }
