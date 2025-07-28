@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.GraphicsEnvironment;
+//import java.awt.GraphicsEnvironment;
 
 import guiComponents.MainFrame;
 import logic.TimeConverter;
@@ -35,7 +35,7 @@ public class Main{
 			i++;
 		}
 		
-		listFonts();
+		//listFonts();
 	}
 	
 	//testing
@@ -75,7 +75,7 @@ public class Main{
 		}
 	}
 	
-	
+	/*
 	private static void listFonts(){
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		
@@ -85,5 +85,5 @@ public class Main{
             System.out.println(fontName);
         }
 	}
-	
+	*/
 }

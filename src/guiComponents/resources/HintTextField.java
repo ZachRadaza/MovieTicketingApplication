@@ -9,7 +9,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 
 //text field with hints on it
-public class HintTextField extends JTextField {
+public class HintTextField extends JTextField{
     /**
 	 * 
 	 */
@@ -20,6 +20,7 @@ public class HintTextField extends JTextField {
     public HintTextField(String hint, int columns) {
         super(columns);
         this.hint = hint;
+        
     }
     
     //getters
@@ -48,4 +49,5 @@ public class HintTextField extends JTextField {
             g2.dispose();
         }
     }
+    
 }

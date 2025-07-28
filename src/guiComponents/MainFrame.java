@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.io.InputStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -56,7 +58,7 @@ public class MainFrame{
 		
 		panelMain = new JPanel();
 		panelMain.setOpaque(false);
-		panelMain.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+		panelMain.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		panelBackground.add(panelMain, BorderLayout.CENTER);
 		
 		panelMain.setVisible(true);
@@ -99,7 +101,6 @@ public class MainFrame{
 		JLabel[] labels = new JLabel[3];
 		String[] texts = {"inspired by Fandango", "FILM TICKETING PROJECT".toUpperCase(), "Zachary Juls Radaza"};
 		Font[] fonts = {fontHeader.deriveFont(15f), fontHeader.deriveFont(20f), fontHeader.deriveFont(15f),};
-		float[] fontSize = {15f, 20f, 15f};
 		
 		for(int i = 0; i < labels.length; i++){
 			labels[i] = new JLabel(texts[i]);
@@ -119,19 +120,41 @@ public class MainFrame{
 		JPanel panel = new JPanel();
 		panel.setOpaque(false);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		panel.setAlignmentX(SwingConstants.CENTER);
-		int thickness = 2;
-		panel.setBorder(BorderFactory.createLineBorder(MainFrame.colorDarkMid, thickness));
+		int thickness = 1;
+		panel.setBorder(BorderFactory.createMatteBorder(0, 0, thickness, 0, MainFrame.colorDarkMid));
 		
-		//TODO
-		JPanel panelLogo = new JPanel();
-		panelLogo.setOpaque(false);
-		
+		JPanel panelLogo = createPanelLogo();
 		searchBar = new SearchBar();
 		
 		panel.add(panelLogo);
 		panel.add(searchBar);
+		
 		return panel;
+	}
+	
+	public JPanel createPanelLogo(){
+		JPanel panelLogo = new JPanel();
+		panelLogo.setOpaque(false);
+		panelLogo.setLayout(new BoxLayout(panelLogo, BoxLayout.X_AXIS));
+		panelLogo.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+		
+		JLabel labelIcon = new JLabel();
+		int imageWidth = 50;
+		int imageHeight = 50;
+		labelIcon.setIcon(new ImageIcon(new ImageIcon("resources/photos/Zandango.png").getImage().getScaledInstance(imageWidth, imageHeight, Image.SCALE_DEFAULT)));
+		labelIcon.setOpaque(false);
+		labelIcon.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		
+		JLabel labelName = new JLabel("Zandango".toUpperCase());
+		Font font = MainFrame.fontHeader.deriveFont(40f);
+		labelName.setFont(font);
+		labelName.setOpaque(false);
+		labelName.setForeground(MainFrame.colorLightMid);
+		
+		panelLogo.add(labelIcon);
+		panelLogo.add(labelName);
+		
+		return panelLogo;
 	}
 	
 	public static Font initializeFont(String filePath){
