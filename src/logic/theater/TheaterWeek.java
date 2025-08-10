@@ -26,8 +26,8 @@ public class TheaterWeek{
 	
 	//getters
 	public TheaterRoom getRoom(int i){
-		if(i - 1 >= rooms.length) return null;
-		return rooms[i - 1];
+		if(i >= rooms.length) return null;
+		return rooms[i];
 	}
 	
 	public Movie movieList(int i){

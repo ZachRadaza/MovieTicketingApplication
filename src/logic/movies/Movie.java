@@ -12,6 +12,7 @@ public class Movie{
 	private float time; //time movie shows
 	private String rating; //rating of movie ex. PG-13
 	private String description;
+	private String poster; //file path to poster
 	
 	public Movie(String title, float length){
 		this.title = title;
@@ -19,7 +20,8 @@ public class Movie{
 		this.time = 0f;
 		this.rating = "";
 		description = "";
-		
+		//poster = "";
+		poster = "resources/photos/superman.jpg";
 	}
 	
 	public Movie(String title, float length, float time, String rating){
@@ -28,6 +30,7 @@ public class Movie{
 		this.time = time;
 		this.rating = rating;
 		description = "";
+		poster = "";
 		
 	}
 	//copies everything
@@ -37,7 +40,7 @@ public class Movie{
 		this.time = copy.getTime();
 		this.rating = copy.getRating();
 		description = copy.getDescription();
-		
+		poster = copy.getPoster();
 	}
 	
 	//getters
@@ -65,6 +68,10 @@ public class Movie{
 		return description;
 	}
 	
+	public String getPoster(){
+		return poster;
+	}
+	
 	//setters
 	public void setTitle(String title){
 		this.title = title;
@@ -88,6 +95,10 @@ public class Movie{
 	
 	public void setDescription(String des){
 		description = des;
+	}
+	
+	public void setPoster(String poster){
+		this.poster = poster;
 	}
 	
 	//methods

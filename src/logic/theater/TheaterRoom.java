@@ -10,12 +10,14 @@ public class TheaterRoom{
 	private int number; //number of this theater house, like its name basically
 	private Movie movie; //the movie the theater will play the whole day
 	private ArrayList<Movie> movies; //all the movies, with the bookings the theater is about to play in the day;
+	private int showingSize; //number of movies being played
 	
 	public TheaterRoom(int number, Movie movie){
 		this.number = number;
 		this.movie = movie;
 		movies = new ArrayList<>();
 		scheduleMovies();
+		showingSize = movies.size();
 		
 	}
 	
@@ -33,6 +35,10 @@ public class TheaterRoom{
 		return movies.get(index);
 	}
 	
+	public int getShowingSize(){
+		return showingSize;
+	}
+	
 	//setters
 	public void setNumber(int n){
 		number = n;
@@ -41,6 +47,10 @@ public class TheaterRoom{
 	public void setMovie(Movie m){
 		movie = m;
 		scheduleMovies();
+	}
+	
+	public void setShowingSize(){
+		showingSize = movies.size();
 	}
 	
 	//methods

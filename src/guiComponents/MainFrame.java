@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import guiComponents.pages.PageHome;
 import guiComponents.resources.Frame;
 import guiComponents.specifics.SearchBar;
 import logic.theater.TheaterHouse;
@@ -32,7 +33,7 @@ public class MainFrame{
 	public static final Font fontText = initializeFont("/fonts/Afacad-Regular.ttf");
 	
 	//fields
-	private Frame frame;
+	private static Frame frame;
 	private JPanel panelBackground; //background panel
 	private JPanel panelMain; //panel to add things on
 	private JPanel panelTop; //panel holding panels on top
@@ -53,13 +54,16 @@ public class MainFrame{
 		frame.add(panelBackground);
 		
 		panelTop = new JPanel();
+		panelTop.setBorder(null);
 		fillPanelTop();
 		panelBackground.add(panelTop, BorderLayout.NORTH);
 		
 		panelMain = new JPanel();
 		panelMain.setOpaque(false);
-		panelMain.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		panelMain.setBorder(BorderFactory.createEmptyBorder(-10, 0, 0, 0));
 		panelBackground.add(panelMain, BorderLayout.CENTER);
+		
+		panelMain.add(new PageHome(house));
 		
 		panelMain.setVisible(true);
 		panelMain.revalidate();
@@ -74,6 +78,10 @@ public class MainFrame{
 	
 	public JPanel getPanelMain(){
 		return panelMain;
+	}
+	
+	public static Frame getFrame(){
+		return frame;
 	}
 	
 	//methods
