@@ -19,19 +19,22 @@ public class RoundedBorderPanel extends JPanel{
 	private int radius;
 	private int thickness;
 	private Color color;
+	private boolean transparent;
 	
 	public RoundedBorderPanel(int radius){
 		this.radius = radius;
 		this.color = Color.BLACK;
 		this.thickness = 2;
+		this.transparent = false;
 		
 		this.setOpaque(false);
 	}
 	
-	public RoundedBorderPanel(int radius, Color color, int thickness){
+	public RoundedBorderPanel(int radius, Color color, int thickness, boolean transparent){
 		this.radius = radius;
 		this.color = color;
 		this.thickness = thickness;
+		this.transparent = transparent;
 		
 		this.setOpaque(false);
 	}
@@ -80,12 +83,14 @@ public class RoundedBorderPanel extends JPanel{
 	    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 	    // Optional: Draw background with rounded corners
-	    g2.setColor(getBackground());
-	    g2.fillRoundRect(
-	        thickness / 2, thickness / 2,
-	        getWidth() - thickness, getHeight() - thickness,
-	        radius, radius
-	    );
+	    if(!transparent){
+		    g2.setColor(getBackground());
+		    g2.fillRoundRect(
+		        thickness / 2, thickness / 2,
+		        getWidth() - thickness, getHeight() - thickness,
+		        radius, radius
+		    );
+	    }
 
 	    // Draw border
 	    g2.setColor(color);

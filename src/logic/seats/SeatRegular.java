@@ -17,14 +17,14 @@ public class SeatRegular extends Seat{
 		if(num < 48){ //A1 - C16
 			String[] letter = {"A", "B", "C"};
 			int letterInt = num / 16;
-			return letter[num / 16] + (num - (letterInt * 16));
+			return letter[num / 16] + ((num - (letterInt * 16)) + 1);
 		} else if(num < 152){ //D1 - K13
 			int number = num - 48;
 			String[] letter = {"D", "E", "F", "G", "H", "I", "J", "K"};
 			int letterInt = number / 13;
-			return letter[number / 13] + (number - (letterInt * 13));
+			return letter[number / 13] + ((number - (letterInt * 13)) + 1);
 		} else { // L1 - L20
-			return "L" + (num - 152);
+			return "L" + ((num - 152) + 1);
 		}
 	}
 }

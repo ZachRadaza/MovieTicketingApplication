@@ -8,14 +8,14 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.OverlayLayout;
 
 import guiComponents.MainFrame;
 import guiComponents.resources.ImageScaler;
@@ -38,7 +38,7 @@ public class HomeMoviePanel extends JPanel{
 	private TimeButton[] timeButtons; //button to book movie on a specific time
 	
 	//gui components
-	private JPanel panelMain; //add and remove things here
+	private RoundedBorderPanel panelMain; //add and remove things here
 
 	public HomeMoviePanel(TheaterRoom theaterRoom){
 		this.theaterRoom = theaterRoom;
@@ -65,12 +65,10 @@ public class HomeMoviePanel extends JPanel{
 		this.setOpaque(false);
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
-		panelMain = new JPanel();
+		panelMain = new RoundedBorderPanel(50, MainFrame.colorDarkMid, 1, false);
 		panelMain.setOpaque(false);
 		panelMain.setLayout(new BorderLayout());
-		int thickness = 1;
-		boolean rounded = true;
-		panelMain.setBorder(BorderFactory.createLineBorder(MainFrame.colorDarkMid, thickness, rounded));
+		panelMain.setBackground(MainFrame.colorDark);
 		
 		JPanel panelCenter = new JPanel();
 		panelCenter.setOpaque(false);
@@ -84,26 +82,40 @@ public class HomeMoviePanel extends JPanel{
 		this.add(panelMain);
 	}
 	
-	private JPanel createPosterPanel(){
-		JPanel panel = new JPanel(); //needed for the borders
-		
+	private JLayeredPane createPosterPanel(){
+		JLayeredPane panel = new JLayeredPane(); //needed for the borders
 		panel.setOpaque(false);
-		panel.setBackground(MainFrame.colorDark);
+		panel.setLayout(new OverlayLayout(panel));
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
 		int photoHeight = 300;
-		
-		//needed for the round edges
+		//panel with photo
 		JPanel panelPoster = new JPanel();
 		panelPoster.setOpaque(false);
-		panelPoster.setBorder(BorderFactory.createLineBorder(MainFrame.colorDarkMid, 1, true));
-		
-		//makes and resized photo
+		panelPoster.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panelPoster.setAlignmentY(Component.CENTER_ALIGNMENT);
 	    JLabel labelIcon = ImageScaler.scaledImageJLabel(filePathPoster, photoHeight, photoHeight);
-	    labelIcon.setBorder(BorderFactory.createEmptyBorder());
-		
+	    labelIcon.setBorder(BorderFactory.createEmptyBorder(7, 0, 0, 0)); //border at the top because setAlightment is always broken
+	    labelIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
+		labelIcon.setAlignmentY(Component.CENTER_ALIGNMENT);
 		panelPoster.add(labelIcon);
-		panel.add(panelPoster);
+	    
+	    //panel with round border
+	    int rad = 50;
+	    int thickness = 15;
+	    RoundedBorderPanel roundedBorder = new RoundedBorderPanel(rad, MainFrame.colorDark, thickness, true);
+	    roundedBorder.setOpaque(false);
+	    roundedBorder.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    roundedBorder.setAlignmentY(Component.CENTER_ALIGNMENT);
+	    
+	    int posterWidth = panelPoster.getPreferredSize().width;
+	    int posterHeight = panelPoster.getPreferredSize().height;
+	    int div = 40;
+	    Dimension dim = new Dimension(posterWidth + (posterWidth / div) , posterHeight + (posterHeight / div));
+	    roundedBorder.setPreferredSize(dim);
+		
+		panel.add(panelPoster, Integer.valueOf(1)); //under
+		panel.add(roundedBorder, Integer.valueOf(2)); //above
 		
 		return panel;
 	}
@@ -140,7 +152,7 @@ public class HomeMoviePanel extends JPanel{
 		int width = 60;
 		Color color = MainFrame.colorLightMid;
 		int thickness = 1;
-		RoundedBorderPanel rating = new RoundedBorderPanel(width, color, thickness);
+		RoundedBorderPanel rating = new RoundedBorderPanel(width, color, thickness, true);
 		rating.setOpaque(false);
 		rating.setBackground(MainFrame.colorDark);
 		Dimension dim = new Dimension(width, 25);

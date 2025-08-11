@@ -9,7 +9,6 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 
 import guiComponents.MainFrame;
-import guiComponents.pages.home.HomeMoviePanel;
 import guiComponents.resources.RoundedBorderPanel;
 import logic.TimeConverter;
 import logic.movies.Movie;
@@ -26,7 +25,7 @@ public class TimeButton extends RoundedBorderPanel implements MouseListener{
 	private Movie movie; //pointer to movie being used
 	
 	public TimeButton(int height, Movie movie){
-		super(height/2, MainFrame.colorLightMid, 1);
+		super(height/2, MainFrame.colorLightMid, 1, false);
 		this.movie = movie;
 		this.addMouseListener(this);
 		
@@ -77,6 +76,7 @@ public class TimeButton extends RoundedBorderPanel implements MouseListener{
 		this.setColor(MainFrame.colorLight);
 		this.setBackground(MainFrame.colorDark);
 		System.out.println("presssed");
+		MainFrame.openPageSeats(movie);
 	}
 
 	@Override

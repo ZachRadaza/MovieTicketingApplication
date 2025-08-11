@@ -13,6 +13,8 @@ public class Movie{
 	private String rating; //rating of movie ex. PG-13
 	private String description;
 	private String poster; //file path to poster
+	private int longestRow; //longest row in the name
+	private int numberOfRows; //number of rows
 	
 	public Movie(String title, float length){
 		this.title = title;
@@ -22,6 +24,8 @@ public class Movie{
 		description = "";
 		//poster = "";
 		poster = "resources/photos/superman.jpg";
+		longestRow = 30;
+		numberOfRows = 12;
 	}
 	
 	public Movie(String title, float length, float time, String rating){
@@ -31,7 +35,8 @@ public class Movie{
 		this.rating = rating;
 		description = "";
 		poster = "";
-		
+		longestRow = 30;
+		numberOfRows = 12;
 	}
 	//copies everything
 	public Movie(Movie copy){
@@ -41,6 +46,8 @@ public class Movie{
 		this.rating = copy.getRating();
 		description = copy.getDescription();
 		poster = copy.getPoster();
+		longestRow = copy.getLongestRow();
+		numberOfRows = copy.getNumberOfRows();
 	}
 	
 	//getters
@@ -60,6 +67,10 @@ public class Movie{
 		return seats[i];
 	}
 	
+	public int getSeatsSize(){
+		return seats.length;
+	}
+	
 	public String getRating(){
 		return rating;
 	}
@@ -70,6 +81,14 @@ public class Movie{
 	
 	public String getPoster(){
 		return poster;
+	}
+	
+	public int getLongestRow(){
+		return longestRow;
+	}
+	
+	public int getNumberOfRows(){
+		return numberOfRows;
 	}
 	
 	//setters
@@ -101,6 +120,13 @@ public class Movie{
 		this.poster = poster;
 	}
 	
+	public void setLongestRow(int num){
+		this.longestRow = num;
+	}
+	
+	public void setNumberOfRows(int num){
+		this.numberOfRows = num;
+	}
 	//methods
 	public void bookSeat(int number, String owner){ //books seat by number
 		seats[number - 1].setTaken(true);

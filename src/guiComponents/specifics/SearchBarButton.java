@@ -1,7 +1,6 @@
 package guiComponents.specifics;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -45,7 +44,7 @@ public class SearchBarButton extends RoundedBorderPanel implements MouseListener
 	}
 	
 	public SearchBarButton(int radius, Color color, int thickness, int width, JTextField textField){
-		super(radius, color, thickness);
+		super(radius, color, thickness, false);
 		this.filePath = "resources/photos/searchIcon.png";
 		this.widthPhoto = 25;
 		this.textField = textField;

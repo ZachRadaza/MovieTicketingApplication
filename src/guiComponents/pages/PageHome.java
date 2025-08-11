@@ -69,6 +69,7 @@ public class PageHome extends JPanel{
 		panelTop.setOpaque(false);
 		panelTop.setLayout(new BoxLayout(panelTop, BoxLayout.X_AXIS));
 		panelTop.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panelTop.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, MainFrame.colorDarkMid));
 		
 		dateButton = new DateButton[numberDays];
 		for(int i = 0; i < dateButton.length; i++){

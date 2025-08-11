@@ -15,8 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import guiComponents.pages.PageHome;
+import guiComponents.pages.PageSeats;
 import guiComponents.resources.Frame;
 import guiComponents.specifics.SearchBar;
+import logic.movies.Movie;
 import logic.theater.TheaterHouse;
 
 //main frame, will be used for everything
@@ -34,10 +36,11 @@ public class MainFrame{
 	
 	//fields
 	private static Frame frame;
-	private JPanel panelBackground; //background panel
-	private JPanel panelMain; //panel to add things on
-	private JPanel panelTop; //panel holding panels on top
+	private static JPanel panelBackground; //background panel
+	private static JPanel panelMain; //panel to add things on
+	private static JPanel panelTop; //panel holding panels on top
 	private SearchBar searchBar; //panel with search bar
+	private static PageHome home; //page
 	
 	private TheaterHouse house; //theater house with all info
 	
@@ -63,7 +66,8 @@ public class MainFrame{
 		panelMain.setBorder(BorderFactory.createEmptyBorder(-10, 0, 0, 0));
 		panelBackground.add(panelMain, BorderLayout.CENTER);
 		
-		panelMain.add(new PageHome(house));
+		home = new PageHome(house);
+		panelMain.add(home);
 		
 		panelMain.setVisible(true);
 		panelMain.revalidate();
@@ -182,6 +186,24 @@ public class MainFrame{
 	        e.printStackTrace();
 	        return null;
 	    }    
+	}
+	
+	public static void openPageHome(){
+		panelMain.removeAll();
+		panelMain.add(home);
+		
+		panelMain.setVisible(true);
+		panelMain.revalidate();
+		panelMain.repaint();
+	}
+	
+	public static void openPageSeats(Movie movie){
+		panelMain.removeAll();
+		panelMain.add(new PageSeats(movie));
+		
+		panelMain.setVisible(true);
+		panelMain.revalidate();
+		panelMain.repaint();
 	}
 	
 }

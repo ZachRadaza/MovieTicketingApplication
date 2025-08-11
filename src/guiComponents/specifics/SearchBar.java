@@ -59,7 +59,7 @@ public class SearchBar extends JPanel{
 	//initializes and fills search panel, panel with the rounded edges
 	private void initializeSearchPanel(int radius){
 		int thickness = 1;
-		searchPanel = new RoundedBorderPanel(radius, MainFrame.colorDarkMid, thickness);
+		searchPanel = new RoundedBorderPanel(radius, MainFrame.colorDarkMid, thickness, true);
 		searchPanel.setBackground(MainFrame.colorDark);
 		searchPanel.setPreferredSize(new Dimension(400, 50));
 		searchPanel.setOpaque(false);
