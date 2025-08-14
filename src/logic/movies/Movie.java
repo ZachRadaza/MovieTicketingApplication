@@ -17,10 +17,10 @@ public class Movie{
 	private int numberOfRows; //number of rows
 	
 	public Movie(String title, float length){
-		this.title = title;
+		this.title = title.trim();
 		this.length = length;
 		this.time = 0f;
-		this.rating = "";
+		this.rating = "PG-13";
 		description = "";
 		//poster = "";
 		poster = "resources/photos/superman.jpg";
@@ -29,12 +29,13 @@ public class Movie{
 	}
 	
 	public Movie(String title, float length, float time, String rating){
-		this.title = title;
+		this.title = title.trim();
 		this.length = length;
 		this.time = time;
 		this.rating = rating;
 		description = "";
-		poster = "";
+		//poster = "";
+		poster = "resources/photos/superman.jpg";
 		longestRow = 30;
 		numberOfRows = 12;
 	}

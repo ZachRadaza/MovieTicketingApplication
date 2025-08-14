@@ -197,9 +197,9 @@ public class MainFrame{
 		panelMain.repaint();
 	}
 	
-	public static void openPageSeats(Movie movie){
+	public static void openPageSeats(Movie movie, int i){
 		panelMain.removeAll();
-		panelMain.add(new PageSeats(movie));
+		panelMain.add(new PageSeats(movie, i));
 		
 		panelMain.setVisible(true);
 		panelMain.revalidate();

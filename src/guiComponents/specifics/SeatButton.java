@@ -10,7 +10,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import guiComponents.MainFrame;
 import guiComponents.resources.CustomRoundedPanel;
@@ -101,13 +100,13 @@ public class SeatButton extends JPanel implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		roundPanel.setColor(MainFrame.colorLight);
-		
+		if(seat.getTaken()) roundPanel.setColor(MainFrame.colorLight);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		roundPanel.setColor(MainFrame.colorLightMid);
-		
+		if(seat.getTaken()) roundPanel.setColor(MainFrame.colorLight);
 	}
 
 	@Override

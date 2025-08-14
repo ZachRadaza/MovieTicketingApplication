@@ -23,10 +23,12 @@ public class TimeButton extends RoundedBorderPanel implements MouseListener{
 	
 	//data fields
 	private Movie movie; //pointer to movie being used
+	private int index;
 	
-	public TimeButton(int height, Movie movie){
+	public TimeButton(int height, Movie movie, int index){
 		super(height/2, MainFrame.colorLightMid, 1, false);
 		this.movie = movie;
+		this.index = index;
 		this.addMouseListener(this);
 		
 		initializePanel(height);
@@ -75,14 +77,13 @@ public class TimeButton extends RoundedBorderPanel implements MouseListener{
 		// TODO Auto-generated method stub
 		this.setColor(MainFrame.colorLight);
 		this.setBackground(MainFrame.colorDark);
-		System.out.println("presssed");
-		MainFrame.openPageSeats(movie);
+		MainFrame.openPageSeats(movie, index);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		this.setColor(MainFrame.colorLight);
-		this.setBackground(MainFrame.colorDarkMid);
+		this.setBackground(MainFrame.colorLightMid);
 	}
 }

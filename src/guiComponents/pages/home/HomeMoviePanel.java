@@ -36,13 +36,15 @@ public class HomeMoviePanel extends JPanel{
 	private String filePathPoster; //file path to poster of movie
 	private TheaterRoom theaterRoom; //holds theater house, all the information needed for this panel
 	private TimeButton[] timeButtons; //button to book movie on a specific time
+	private int index;
 	
 	//gui components
 	private RoundedBorderPanel panelMain; //add and remove things here
 
-	public HomeMoviePanel(TheaterRoom theaterRoom){
+	public HomeMoviePanel(TheaterRoom theaterRoom, int index){
 		this.theaterRoom = theaterRoom;
 		this.filePathPoster = theaterRoom.getMovie().getPoster();
+		this.index = index;
 		initializeTimeButtons();
 		initializePanel();
 		
@@ -56,7 +58,7 @@ public class HomeMoviePanel extends JPanel{
 		timeButtons = new TimeButton[theaterRoom.getShowingSize()];
 		
 		for(int i = 0; i < timeButtons.length; i++){
-			timeButtons[i] = new TimeButton(35, theaterRoom.getMovies(i));
+			timeButtons[i] = new TimeButton(35, theaterRoom.getMovies(i), index);
 		}
 	}
 	

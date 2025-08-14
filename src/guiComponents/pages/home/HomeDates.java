@@ -92,7 +92,7 @@ public class HomeDates extends JPanel{
 		TheaterRoom[] rooms = {theaterHouse.getImax().getRoom(date), theaterHouse.get3D().getRoom(date), theaterHouse.getRegular1().getRoom(date), theaterHouse.getRegular2().getRoom(date)};
 		
 		for(int i = 0; i < homeMoviePanel.length; i++){
-			homeMoviePanel[i] = new HomeMoviePanel(rooms[i]);
+			homeMoviePanel[i] = new HomeMoviePanel(rooms[i], date);
 		}
 	}
 }
