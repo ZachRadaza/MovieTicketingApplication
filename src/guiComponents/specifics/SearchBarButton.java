@@ -88,7 +88,7 @@ public class SearchBarButton extends RoundedBorderPanel implements MouseListener
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		SearchBar.search(textField.getText());
+		MainFrame.openPageSearch(textField.getText());
 	}
 
 	@Override

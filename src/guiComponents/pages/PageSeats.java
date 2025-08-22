@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -21,6 +22,7 @@ import guiComponents.MainFrame;
 import guiComponents.resources.ImageScaler;
 import guiComponents.resources.RoundedBorderPanel;
 import guiComponents.specifics.BackButtonPageSeats;
+import guiComponents.specifics.NextButtonPageSeats;
 import guiComponents.specifics.SeatButton;
 import logic.TimeConverter;
 import logic.movies.Movie;
@@ -36,6 +38,8 @@ public class PageSeats extends JPanel{
 	//logic
 	private Movie movie;
 	private int index; //index of when in the calendar it would be, plus x
+	private int numberOfTickets; //number of tickets booked by user
+	private ArrayList<String> ticketList; //strings of booked tickets
 	
 	//gui
 	private JPanel panelMain;
@@ -45,10 +49,13 @@ public class PageSeats extends JPanel{
 	private JPanel panelBottom;
 	private SeatButton[] seatButton;
 	private JPanel panelSeat;
+	private JLabel ticketLabel;
+	private NextButtonPageSeats nextButton;
 	
 	public PageSeats(Movie movie, int index){
 		this.movie = movie;
 		this.index = index;
+		ticketList = new ArrayList<>();
 		
 		this.setOpaque(false);
 		
@@ -96,6 +103,18 @@ public class PageSeats extends JPanel{
 	
 	public Seat getSeat(int i){
 		return seatButton[i].getSeat();
+	}
+	
+	public int getIndex(){
+		return index;
+	}
+	
+	public int getNumberOfTickets(){
+		return numberOfTickets;
+	}
+	
+	public String getTicketList(int i){
+		return ticketList.get(i);
 	}
 	
 	//initializing methods
@@ -307,18 +326,78 @@ public class PageSeats extends JPanel{
 		seatButton = new SeatButton[movie.getSeatsSize()];
 		
 		for(int i = 0; i < seatButton.length; i++){
-			seatButton[i] = new SeatButton(movie.getSeats(i));
+			seatButton[i] = new SeatButton(movie.getSeats(i), this);
 		}
 	}
 	
 	private void initializePanelBottom(){
 		panelBottom = new JPanel();
 		
+		panelBottom.setOpaque(false);
+		panelBottom.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, MainFrame.colorDarkMid));
+		panelBottom.setLayout(new BorderLayout());
+		
+		//tickets
+		JPanel panelTop = new JPanel();
+		panelTop.setOpaque(false);
+		
+		ticketLabel = new JLabel(numberOfTickets + " Selected".toUpperCase());
+		ticketLabel.setForeground(MainFrame.colorLight);
+		ticketLabel.setFont(MainFrame.fontHeader.deriveFont(15f));
+		panelTop.add(ticketLabel);
+		
+		//next
+		JPanel panelMid = new JPanel();
+		panelMid.setOpaque(false);
+		
+		nextButton = new NextButtonPageSeats(this);
+		panelMid.add(nextButton);
+		
+		panelBottom.add(panelTop, BorderLayout.NORTH);
+		panelBottom.add(panelMid, BorderLayout.CENTER);
+		
+		refreshNumberOfTickets();
 	}
+	
 	//for when back button is pressed
 	public void cancelBooking(){
 		for(int i = 0; i < seatButton.length; i++){
 			seatButton[i].unBook();
 		}
+	}
+	
+	public void addNumberOfTickets(String seat){
+		numberOfTickets++;
+		ticketList.add(seat);
+		refreshNumberOfTickets();
+	}
+	
+	public void removeNumberOfTickets(String seat){
+		numberOfTickets--;
+		ticketList.remove(seat);
+		refreshNumberOfTickets();
+	}
+	
+	public void refreshNumberOfTickets(){
+		String t = " Selected";
+		if(numberOfTickets > 0) {
+			nextButton.setLabel("next".toUpperCase());
+			
+			t += ": ";
+			for(int i = 0; i < ticketList.size(); i++){
+				t += ticketList.get(i);
+				if(i < ticketList.size() - 1) t += ", ";
+			}
+		
+		} else {
+			nextButton.setLabel("select seats".toUpperCase());
+		}
+		
+		ticketLabel.setText(numberOfTickets + t.toUpperCase());
+		nextButton.refresh();
+		
+		ticketLabel.setVisible(true);
+		ticketLabel.revalidate();
+		ticketLabel.repaint();
 	}
 }

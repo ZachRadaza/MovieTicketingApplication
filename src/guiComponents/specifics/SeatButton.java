@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import guiComponents.MainFrame;
+import guiComponents.pages.PageSeats;
 import guiComponents.resources.CustomRoundedPanel;
 import logic.seats.Seat;
 
@@ -26,14 +27,16 @@ public class SeatButton extends JPanel implements MouseListener{
 	private Seat seat;
 	private String seatNumber;
 	private boolean originallyTaken; //so you cant unbooked
+	private PageSeats pageSeats;
 	
 	//gui
 	private CustomRoundedPanel roundPanel;
 	
-	public SeatButton(Seat seat){
+	public SeatButton(Seat seat, PageSeats pageSeats){
 		this.seat = seat;
 		this.seatNumber = seat.getName();
 		this.originallyTaken = seat.getTaken();
+		this.pageSeats = pageSeats;
 		
 		this.addMouseListener(this);
 		this.setOpaque(false);
@@ -114,9 +117,11 @@ public class SeatButton extends JPanel implements MouseListener{
 		if(!seat.getTaken()){
 			roundPanel.setBackground(MainFrame.colorDarkMid);
 			seat.setTaken(true);
+			pageSeats.addNumberOfTickets(seat.getName());
 		} else {
 			roundPanel.setBackground(MainFrame.colorLightMid);
 			seat.setTaken(false);
+			pageSeats.removeNumberOfTickets(seat.getName());
 		}
 		
 	}

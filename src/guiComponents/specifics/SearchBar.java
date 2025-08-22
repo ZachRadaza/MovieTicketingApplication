@@ -83,7 +83,7 @@ public class SearchBar extends JPanel{
 		
 		textField.addActionListener(e -> {
 		    String input = textField.getText();
-		    search(input);
+		    MainFrame.openPageSearch(input);
 		});
 		
 		float fontSize = 20f;
@@ -107,7 +107,4 @@ public class SearchBar extends JPanel{
 		return panel;
 	}
 	
-	public static void search(String text){
-		System.out.println("Text texted: " + text);
-	}
 }

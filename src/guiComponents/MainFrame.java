@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -14,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import guiComponents.pages.PageCheckout;
 import guiComponents.pages.PageHome;
+import guiComponents.pages.PageSearch;
 import guiComponents.pages.PageSeats;
 import guiComponents.resources.Frame;
 import guiComponents.specifics.SearchBar;
@@ -43,10 +46,12 @@ public class MainFrame{
 	private static PageHome home; //page
 	
 	private TheaterHouse house; //theater house with all info
+	private static ArrayList<Movie> movieList;
 	
 	
 	public MainFrame(TheaterHouse house){
 		this.house = house;
+		initializeMovieList();
 		
 		frame = new Frame();
 		frame.setVisible(true);
@@ -89,6 +94,14 @@ public class MainFrame{
 	}
 	
 	//methods
+	private void initializeMovieList(){
+		movieList = new ArrayList<>();
+		for(int i = 0; i < house.getMovieList().size(); i++){
+			movieList.add(house.getMovieList().get(i));
+		}
+	}
+	
+	
 	private void fillPanelTop(){
 		panelTop.setLayout(new BoxLayout(panelTop, BoxLayout.Y_AXIS));
 		panelTop.setOpaque(false);
@@ -188,6 +201,15 @@ public class MainFrame{
 	    }    
 	}
 	
+	public static void openPageSearch(String input){
+		panelMain.removeAll();
+		panelMain.add(new PageSearch(input, movieList));
+		
+		panelMain.setVisible(true);
+		panelMain.revalidate();
+		panelMain.repaint();
+	}
+	
 	public static void openPageHome(){
 		panelMain.removeAll();
 		panelMain.add(home);
@@ -200,6 +222,15 @@ public class MainFrame{
 	public static void openPageSeats(Movie movie, int i){
 		panelMain.removeAll();
 		panelMain.add(new PageSeats(movie, i));
+		
+		panelMain.setVisible(true);
+		panelMain.revalidate();
+		panelMain.repaint();
+	}
+	
+	public static void openPageCheckout(PageSeats pageSeats){
+		panelMain.removeAll();
+		panelMain.add(new PageCheckout(pageSeats));
 		
 		panelMain.setVisible(true);
 		panelMain.revalidate();
